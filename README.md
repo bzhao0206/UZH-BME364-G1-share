@@ -55,4 +55,4 @@ The scripts are in `R/mac_linux/` or `R/windows/`.
 © 2026 Huseyn Babayev and Can Zeyneloglu, University of Zurich. Slides, manuals, example images and
 data: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); code (R Markdown, Fiji macro):
 MIT. Reuse is welcome with attribution; see `LICENSE.md` for how to cite and for the third-party
-parts (UZH logo and design, title photos, the FEBS Letters figure) that keep their own licenses.
+parts (UZH logo and design, title photos, the published figures) that keep their own licenses.

@@ -31,3 +31,5 @@ These parts belong to others and keep their own terms; they are not licensed her
 - **Title photo, barrier deck**: Reflections on Davos, Peter Thoeny, CC BY-NC-SA 2.0, Flickr.
 - **Figure 2B, Confocal Part II deck**: Zeyneloglu C, Babayev H, et al. FEBS Letters 2025;
   599(22): 3208-3243, doi:10.1002/1873-3468.70113, under the license of that article.
+- **Figures 3 and 4, barrier deck**: Zeyneloglu C, Babayev H, 2025, under the license of that
+  publication (Figure 4 created with BioRender).

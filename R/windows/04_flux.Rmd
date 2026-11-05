@@ -110,6 +110,29 @@ papp %>% dunn_test(papp_cm_s ~ condition, p.adjust.method = "none") %>%
   filter(group1 == "ctrl") %>% adjust_pvalue(method = "holm")
 ```
 
+## Comparison plot
+
+Papp of every insert by condition, on a log scale. The bar is the geometric mean, and the p-values
+are Dunnett's test of each P80 concentration against the control (on log10 Papp, as above).
+
+```{r comparison-plot}
+dunnett <- emmeans(fit, trt.vs.ctrl ~ condition)$contrasts %>% as.data.frame() %>%
+  mutate(condition = str_remove_all(contrast, "[()]| - ctrl"),
+         label     = if_else(p.value < 0.001, "p < 0.001", sprintf("p = %.2f", p.value)))
+pc <- ggplot(papp, aes(condition, papp_cm_s * 1e7)) +
+  stat_summary(fun = mean, geom = "crossbar", width = 0.5, colour = "#333333") +
+  geom_jitter(aes(colour = condition, shape = condition), width = 0.1, height = 0, size = 3) +
+  geom_text(data = dunnett, aes(condition, 16, label = label), size = 4.2) +
+  scale_y_log10(breaks = c(0.3, 1, 3, 10), limits = c(0.25, 20)) +
+  scale_x_discrete(labels = labels) +
+  scale_colour_manual(values = cols, guide = "none") +
+  scale_shape_manual(values = c(16, 15, 17, 18), guide = "none") +
+  labs(x = NULL, y = "FD4 Papp (10\u207B\u2077 cm/s, log scale)",
+       caption = "Simulated data, n = 4 inserts; bar = geometric mean; Dunnett vs control")
+pc
+ggsave("figures/04_flux_comparison.png", pc, width = 6, height = 4.1, dpi = 200, bg = "white")
+```
+
 ## Step 5: TEER and flux together
 
 TEER at 48 h against Papp of the same insert (Spearman).
@@ -124,12 +147,12 @@ both %>% cor_test(teer, papp_cm_s, method = "spearman")
 ## Plot
 
 ```{r plot}
-p <- ggplot(both, aes(teer, papp_cm_s, colour = condition, shape = condition)) +
+p <- ggplot(both, aes(teer, papp_cm_s * 1e7, colour = condition, shape = condition)) +
   geom_point(size = 3.2) +
-  scale_y_log10() +
+  scale_y_log10(breaks = c(0.3, 1, 3, 10)) +
   scale_colour_manual(values = cols, labels = labels) +
   scale_shape_manual(values = c(16, 15, 17, 18), labels = labels) +
-  labs(x = "TEER at 48 h (\u03A9 cm\u00B2)", y = "FD4 Papp (cm/s, log scale)", colour = NULL, shape = NULL,
+  labs(x = "TEER at 48 h (\u03A9 cm\u00B2)", y = "FD4 Papp (10\u207B\u2077 cm/s, log scale)", colour = NULL, shape = NULL,
        caption = "Simulated data, one point per insert (4 per condition)")
 p
 ggsave("figures/04_flux_papp_vs_teer.png", p, width = 6, height = 4.1, dpi = 200, bg = "white")
