@@ -115,16 +115,21 @@ Fields in the background, coloured by well; the well means on top.
 
 ```{r superplot}
 p <- ggplot(fields, aes(condition, ratio)) +
-  geom_jitter(aes(colour = well), width = 0.15, alpha = 0.45, size = 1.8) +
-  stat_summary(data = well_means, fun = mean, geom = "crossbar", width = 0.5, colour = "#333333") +
-  geom_point(data = well_means, aes(fill = well, shape = well), size = 4.5, colour = "#333333",
+  geom_jitter(aes(colour = well), width = 0.15,
+              alpha = 0.45, size = 1.8) +
+  stat_summary(data = well_means, fun = mean, geom = "crossbar",
+               width = 0.5, colour = "#333333") +
+  geom_point(data = well_means, aes(fill = well, shape = well),
+             size = 4.5, colour = "#333333",
              position = position_dodge(width = 0.35)) +
   scale_colour_manual(values = well_cols) +
   scale_fill_manual(values = well_cols) +
-  scale_shape_manual(values = c(well1 = 21, well2 = 22, well3 = 24, well4 = 23, well5 = 25)) +
+  scale_shape_manual(values = c(21, 22, 24, 23, 25)) +
   scale_x_discrete(labels = labels) +
-  labs(x = NULL, y = "ZO-1 / DAPI ratio", colour = "Well", fill = "Well", shape = "Well",
-       caption = "Simulated data, small dots = fields, large = well means, bar = mean (n = 5 wells)")
+  labs(x = NULL, y = "ZO-1 / DAPI ratio",
+       colour = "Well", fill = "Well", shape = "Well",
+       caption = "Simulated data; dots = fields, symbols = wells")
 p
-ggsave("figures/05_if_superplot.png", p, width = 6.6, height = 4.3, dpi = 200, bg = "white")
+ggsave("figures/05_if_superplot.png", p,
+       width = 6.6, height = 4.3, dpi = 200, bg = "white")
 ```
