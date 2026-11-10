@@ -14,8 +14,8 @@ knitr::opts_chunk$set(message = FALSE, fig.width = 6.6, fig.height = 4.3)
 ```
 
 **Data:** `data/fiji_results_zo1.csv` (one row per field, the output of `fiji/measure_zo1.ijm`) and
-`data/image_metadata.csv` (what each image is). Simulated. One Caco-2 experiment in a 96-well
-glass-bottom plate: 4 conditions (control, P80 0.02, 0.1, 0.5 %) × 5 wells × 3 fields, plus one
+`data/image_metadata.csv` (what each image is). Simulated. One Caco-2 experiment in a 24-well
+glass-bottom plate: 4 conditions (control, P80 0.02, 0.1, 0.5 %) × 5 wells × 5 fields, plus one
 no-primary control well. **n = wells per condition:** fields in one well are not independent.
 
 Read-out per field: the **ZO-1/DAPI ratio** = (whole-field ZO-1 − no-primary) / whole-field DAPI,
@@ -59,7 +59,7 @@ bg
 fields <- fields %>% filter(condition != "noprimary") %>%
   mutate(ratio     = (ZO1_Mean - bg) / DAPI_Mean,
          condition = factor(condition, levels = conds),
-         well_id   = plate_well)                           # unique well on the plate (B2, C3, ...)
+         well_id   = plate_well)                           # unique well on the plate (A1, B3, ...)
 ```
 
 ## Step 3: fields → wells
@@ -79,7 +79,7 @@ well_means %>% group_by(condition) %>%
 
 ### 4a. Wrong: every field as independent
 
-Pseudoreplication: 15 fields per condition, df = 3, 56.
+Pseudoreplication: 25 fields per condition, df = 3, 96.
 
 ```{r wrong}
 fit_fields <- aov(ratio ~ condition, data = fields)

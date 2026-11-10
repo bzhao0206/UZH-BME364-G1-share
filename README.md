@@ -17,8 +17,8 @@ Materials for the two Group I workshops on 5 November 2026 (Huseyn Babayev, Can 
 ## Design
 
 Caco-2 monolayers, **control and polysorbate 80 (P80) 0.02, 0.1 and 0.5 % v/v** for TEER and
-FITC-dextran flux (inserts in a 24-well Transwell plate) and ZO-1 immunofluorescence (96-well
-glass-bottom plate). MTT over a P80 dose series from 1 % down to 0.03125 % (2-fold), with control
+FITC-dextran flux (inserts in a 24-well Transwell plate) and ZO-1 immunofluorescence (24-well
+glass-bottom plate, 5 wells per condition, 5 fields per well). MTT over a P80 dose series from 1 % down to 0.03125 % (2-fold), with control
 columns on both sides of the series. One experiment, so n = wells or inserts (technical replicates).
 Each P80 concentration vs control: ANOVA + Dunnett (Games–Howell when SDs differ); MTT also an IC50
 fit. ZO-1 amount is reported as the ZO-1/DAPI ratio.
